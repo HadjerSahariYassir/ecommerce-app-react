@@ -1,7 +1,9 @@
 
 import './App.css';
-import HomePage from "./pages/homepage.component"
-import { Route, Switch, Link } from "react-router-dom"
+import HomePage from "./pages/homepage.component";
+import { Route, Switch, Link } from "react-router-dom";
+import ShopPage from './pages/shop/shop.component'; 
+
 {/*
 const HomePage = (props) => {
   return(
@@ -39,12 +41,6 @@ const TopicDetail = (props) => {
   )  
 }
 */}
-const HatsPage = () => {
-  return(
-  <div>
-      <h1>HATS PAGE</h1>
-  </div>)
-}
 
 function App() {
     return (
@@ -52,7 +48,7 @@ function App() {
               <Route exact path="/" component={HomePage} />
              {/* <Route exact path="/topics" component={TopicsList} />    
               <Route path="/topics/:topicId" component={TopicDetail} />  */}
-             <Route path="/hats" component={HatsPage}></Route>
+             <Route path="/shop" component={ShopPage}></Route>
              
         </div>
     );
