@@ -3,7 +3,7 @@ import './App.css';
 import HomePage from "./pages/homepage.component";
 import { Route, Switch, Link } from "react-router-dom";
 import ShopPage from './pages/shop/shop.component'; 
-
+import Header from './componenets/directory/header/header.component';
 {/*
 const HomePage = (props) => {
   return(
@@ -45,11 +45,14 @@ const TopicDetail = (props) => {
 function App() {
     return (
         <div>
+          <Header/>
+          <Switch>
               <Route exact path="/" component={HomePage} />
-             {/* <Route exact path="/topics" component={TopicsList} />    
-              <Route path="/topics/:topicId" component={TopicDetail} />  */}
-             <Route path="/shop" component={ShopPage}></Route>
-             
+                {/* <Route exact path="/topics" component={TopicsList} />    
+                  <Route path="/topics/:topicId" component={TopicDetail} />  */}
+                <Route path="/shop" component={ShopPage}></Route>
+          </Switch>
+            
         </div>
     );
 }

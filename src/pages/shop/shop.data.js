@@ -279,6 +279,5 @@
           }
         ]
       }
-];
-
+]
 export default SHOP_DATA;
