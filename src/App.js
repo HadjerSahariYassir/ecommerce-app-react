@@ -4,57 +4,51 @@ import HomePage from "./pages/homepage.component";
 import { Route, Switch, Link } from "react-router-dom";
 import ShopPage from './pages/shop/shop.component'; 
 import Header from './componenets/directory/header/header.component';
-{/*
-const HomePage = (props) => {
-  return(
-    <div>
-       
-        <button onClick={() => props.history.push("/topics")}>Topics</button>
-       <h1>HOME PAGE</h1>
-    </div>
-  )
-}
+import signInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import React from 'react';
+import { auth } from './firebase/firebase.utils';
 
-const TopicsList = (props) => {
-  console.log(props);
-  return (
-    <div>
-      <h1>
-          TOPICS PAGE
-      </h1>  
-      <Link to={`${props.match.url}/02`}>Topic 02</Link>
-      <Link to={`${props.match.url}/23`}>Topic 23</Link>
-      <Link to={`${props.match.url}/22`}>Topic 22</Link>
-   </div>
-  )  
-}
 
-const TopicDetail = (props) => {
-  console.log(props);
-  return (
-    <div>
-      <h1>
-          TOPIC DETAIL PAGE {props.match.params.topicId}
-      </h1>  
-    
-   </div>
-  )  
-}
-*/}
+class App extends React.Component {
+  constructor() {
+    super();
 
-function App() {
+    this.state = {
+      currentUser: null
+    }
+  }
+
+  unsubscribeFromAuth = null;
+
+  componentDidMount() {
+    this.unsubsribeFromAuth = auth.onAuthStateChanged(user => {
+      this.setState({ currentUser : user });
+      console.log('currenruser',user);
+    })
+  }
+
+  componentWillUnmount() {
+    this.unsubsribeFromAuth();
+  }
+  
+
+
+  render() {
     return (
-        <div>
-          <Header/>
-          <Switch>
-              <Route exact path="/" component={HomePage} />
-                {/* <Route exact path="/topics" component={TopicsList} />    
-                  <Route path="/topics/:topicId" component={TopicDetail} />  */}
-                <Route path="/shop" component={ShopPage}></Route>
-          </Switch>
-            
-        </div>
-    );
+      <div>
+        <Header currentUser={this.state.currentUser} />
+        <Switch>
+            <Route exact path="/" component={HomePage} />
+              {/* <Route exact path="/topics" component={TopicsList} />    
+                <Route path="/topics/:topicId" component={TopicDetail} />  */}
+              <Route path="/shop" component={ShopPage} />
+              <Route path="/signin" component={signInAndSignUpPage} />
+        </Switch>
+          
+      </div>
+  );
+  }
+    
 }
 
 export default App;
